@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 using System;
 using System.IO;
 using UnityEngine.UI;
@@ -29,8 +30,45 @@ public class CSVController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //引号里写图像识别的水果名称
+        //string recognized_fruit = "Apple Braeburn";//用于样例
+
+        //for( int i = 0; i < CSV.GetInstance().m_ArrayData.Count; i++)
+        //{
+        //    if(String.Compare(recognized_fruit, CSV.GetInstance().getString(i, 0)) == 0)
+        //    {
+        //        text_name.text = CSV.GetInstance().getString(i, 0);
+        //        text_price.text = CSV.GetInstance().getString(i, 1);
+        //    }
+        //}
+        
+        string fullPath = "Assets/StreamingAssets/Fruit" + "/";  //路径
+        string recognized_fruit = "Apple Braeburn";
+
+        //获取指定路径下面的所有资源文件  
+        if (Directory.Exists(fullPath))
+        {
+            DirectoryInfo direction = new DirectoryInfo(fullPath);
+            FileInfo[] files = direction.GetFiles("*", SearchOption.AllDirectories);
+
+            for (int i = 0; i < files.Length; i++)
+            {
+                if (files[i].Name.EndsWith(".meta"))
+                {
+                    continue;
+                }
+                Debug.Log(files[i].Name);  //打印出来这个文件架下的所有文件
+                
+                if(String.Compare(recognized_fruit + ".jpg", files[i].Name) == 0)
+                {
+                    Debug.Log(Application.streamingAssetsPath + "/Fruit" + files[i].Name);
+                }
+            }
+
+        }
+
         //if(apple)    if recognized as apple
-        image_path = Application.streamingAssetsPath + "/Fruit/Apple.jpg";
+        image_path = Application.streamingAssetsPath + "/Fruit/Apple Bareburn.jpg";
         image_str = SetImageToString(image_path);
         image.texture = GetTextureByString(image_str);
 
