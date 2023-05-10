@@ -9,9 +9,8 @@ public class SwitchScene : MonoBehaviour
     {
         SceneManager.LoadScene("BeforeLive");
     }
-    public void SwichToLive()
+    public void SwitchToLive()
     {
         SceneManager.LoadScene("Live");
     }
-    
 }
