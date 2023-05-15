@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 
-public class LinkTouch : MonoBehaviour
+public class BackTouch : MonoBehaviour
 {
     public GameObject Commodity;
     // Start is called before the first frame update
@@ -24,7 +24,7 @@ public class LinkTouch : MonoBehaviour
             {
                 if (EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
                 {
-                    Touch();
+                    Back();
                 }
                 else
                     return;
@@ -32,9 +32,9 @@ public class LinkTouch : MonoBehaviour
         }
     }
 
-    public void Touch()
+    public void Back()
     {
-        Commodity.SetActive(true);  
+        Commodity.SetActive(false);
     }
 
 }

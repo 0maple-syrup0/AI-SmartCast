@@ -11,6 +11,11 @@ public class TextGenerate : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        text = GameObject.Find("Canvas/Copyright").GetComponent<Text>();
+
+        content = File.ReadAllText(Application.streamingAssetsPath + "/Copyright.txt");
+        text.text = content;
+
         text = GameObject.Find("Canvas/Promotion").GetComponent<Text>();
 
         content = File.ReadAllText(Application.streamingAssetsPath + "/Promotion.txt");
