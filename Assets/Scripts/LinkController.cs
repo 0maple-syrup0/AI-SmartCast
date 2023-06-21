@@ -13,9 +13,9 @@ public class LinkController : MonoBehaviour
     TMP_Text text_price_link;
     RawImage image_link;
 
-    TMP_Text text_name_com;
-    TMP_Text text_price_com;
-    RawImage image_com;
+    public TMP_Text text_name_com;
+    public TMP_Text text_price_com;
+    public RawImage image_com;
 
     private string image_path;
     private string image_str;
@@ -60,17 +60,16 @@ public class LinkController : MonoBehaviour
 
         image_path = Application.streamingAssetsPath + "/Fruit" + "/" + recognized_fruit + ".jpg"; 
         image_str = SetImageToString(image_path);
+        
         image_link.texture = GetTextureByString(image_str);
 
         text_name_link.text = CSV.GetInstance().getString(row, 0);
         text_price_link.text = CSV.GetInstance().getString(row, 1);
 
-        //image_path = Application.streamingAssetsPath + "/Fruit" + "/" + recognized_fruit + ".jpg";
-        //image_str = SetImageToString(image_path);
-        //image_com.texture = GetTextureByString(image_str);
+        image_com.texture = GetTextureByString(image_str);
 
-        //text_name_com.text = CSV.GetInstance().getString(1, 0);
-        //text_price_com.text = CSV.GetInstance().getString(1, 1);
+        text_name_com.text = CSV.GetInstance().getString(row, 0);
+        text_price_com.text = CSV.GetInstance().getString(row, 1);
     }
 
     private string SetImageToString(string imgPath)
