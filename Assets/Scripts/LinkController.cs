@@ -17,8 +17,17 @@ public class LinkController : MonoBehaviour
     public TMP_Text text_price_com;
     public RawImage image_com;
 
+    public GameObject linkUI;
+
     private string image_path;
     private string image_str;
+
+
+    //语音识别;
+    private bool isSpeechRec=true;
+
+    string recognized_fruit ="pineapple";
+
 
     int row;
 
@@ -44,10 +53,11 @@ public class LinkController : MonoBehaviour
         //---------------------------------
 
         //string recognized_fruit = "Apple";//用于样例
+        Debug.Log(row);
+        chooseFruit();
 
-        string recognized_fruit = "Pineapple";
         
-        if (recognized_fruit == "Apple")
+   /*     if (recognized_fruit == "Apple")
             row = 1;
         else if(recognized_fruit == "Cherry")
             row = 2;
@@ -56,8 +66,8 @@ public class LinkController : MonoBehaviour
         else if (recognized_fruit == "Orange")
             row = 4;
         else if (recognized_fruit == "Pineapple")
-            row = 5;
-
+            row = 5;*/
+   
         image_path = Application.streamingAssetsPath + "/Fruit" + "/" + recognized_fruit + ".jpg"; 
         image_str = SetImageToString(image_path);
         
@@ -89,5 +99,60 @@ public class LinkController : MonoBehaviour
         tex.LoadImage(arr);
         tex.Apply();
         return tex;
+    }
+
+    public void getCategoty(int _category)
+    {
+        row = _category;
+    }
+
+    public void getIsSpeechRec(bool _isSpeechRec)
+    {
+        isSpeechRec = _isSpeechRec;
+    }
+    private void chooseFruit()
+    //'apple0','banana','orange2','cherry3','lychee4','pineapple'
+    {
+        if (isSpeechRec == true)
+        {
+          
+            linkUI.SetActive(true);
+            if (row == 0)
+            {
+                recognized_fruit = "apple";
+                
+            }
+            else if (row == 1)
+            {
+                recognized_fruit = "banana";
+            }
+            else if (row == 2)
+            {
+                recognized_fruit = "orange";
+            }
+            else if (row == 3)
+            {
+                recognized_fruit = "cherry";
+            }
+            else if (row == 4)
+            {
+                recognized_fruit = "lychee";
+            }
+            else if (row == 5)
+            {
+                recognized_fruit = "pineapple";
+            }
+            else
+            {
+                Debug.Log("Can't find this fruit ");
+                linkUI.SetActive(false);
+            }
+        }
+        else
+        {
+            Debug.Log("未检测到目标语音");
+            linkUI.SetActive(false);
+
+        }
     }
 }
